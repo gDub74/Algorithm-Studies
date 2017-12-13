@@ -1,0 +1,3 @@
+These studies are all coded by myself during my time in school at the Coding Dojo. They are all written in JavaScript. This is a great way for me to learn the JS language as well as learn skills and methods that will be applicable to any other languages I will possibly be learning down the road. I really like the way studying algorithms makes my brain tic- creating new pathways! I love being challenged and even if I feel stuck sometimes I know the solution will present itself eventually. These exercises, in a way, are teaching me how to learn.  
+
+-Dec 12, 2017
