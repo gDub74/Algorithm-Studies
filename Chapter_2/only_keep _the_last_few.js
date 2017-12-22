@@ -6,7 +6,7 @@
 function arrShorter(arr, x){
     //for loop runing x number of times
     for (var i=0; i< x; i++){
-        //move arr.length-x index values from beginning of array to end while not changing order of the rest of the array, so shift left by that amount.
+        //move arr.length-x index values from end of array to beginning while not changing order, so shift left by that amount.
         arr[i]=arr[i+(arr.length-x)];
     }
 
