@@ -1,4 +1,4 @@
-//Given an array, insest an additional value at the begining of the array.
+//Given an array, insert an additional value at the begining of the array.
 
 
 function pushFront(arr, value){
