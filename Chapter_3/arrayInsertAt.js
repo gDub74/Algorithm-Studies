@@ -7,6 +7,7 @@ function insertAt(arr, idx, value){
     //move thru arr backwords and shft everything over from the given idx to make a spot for new value
     for (var i = arr.length-1; i>= idx; i--){
         arr[i]= arr[i-1];
+        console.log(i);
     }
     arr.push(last);
     arr[idx] = value;//overrite value into given index in array
