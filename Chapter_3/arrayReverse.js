@@ -17,3 +17,4 @@ function arrayReverser(arr){
 
 console.log(arrayReverser([1,2,3,4,5,6,7]));
 console.log(arrayReverser([1,2,3,4,5,6,7,8]));
+console.log(arrayReverser(['reverse?', 'array', 'this', 'will']))
