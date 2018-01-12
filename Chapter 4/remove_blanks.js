@@ -4,7 +4,6 @@
 x = "Pl ayTha t Fu nky M usi c"
 
 function blankRemover(str){
-    var new_arr = [];
     var new_string = '';
     for (var i = 0; i < str.length; i++){
         if (str[i] != ' '){
