@@ -1,6 +1,7 @@
 //given a string check to see it it is a palindrome and return boolean --don't ignore white space or capitalization
 
 
+
 x = "racecar";
 y = "Racecar";
 z = "r acecar";
@@ -22,3 +23,5 @@ console.log(palindromeChecker(x));
 console.log(palindromeChecker(y));
 console.log(palindromeChecker(z));
 
+
+//now ignoring whitespace and capitalization, we would first need to rempve all white space. The change all uppercase to lowercase, either using an object with key:value of upper and lowercase, or a lot of if statements...
