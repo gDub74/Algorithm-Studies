@@ -1,5 +1,7 @@
 // “Given a sequence of parentheses, braces and brackets, determine whether it is valid. Example: "W(a{t}s[o(n{ c}o)m]e )h[e{r}e]!" => true. "D(i{a}l[ t]o)n{e" => false. "A(1)s[O (n]0{t) 0}k" => false.”
 
+//note: this is a work in progress, also I have learned a much easier way to do this where you set up an object which holdes matching pairs of braces as keys and values and then you can use that as a reference to check your current strung character value...
+
 
 x = "W(a{t}s[o(n{ c}o)m]e )h[e{r}e]!";  //true
 y = "D(i{a}l[ t]o)n{e"  //false
