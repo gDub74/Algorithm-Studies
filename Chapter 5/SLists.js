@@ -28,6 +28,7 @@
 // console.log(myNode);
 // myNode.sayHello();
 
+
 class Node {
 	constructor(val) {
 		this.val = val;
@@ -60,7 +61,8 @@ class SList {
 			return this;	
 		}
 	}
-	firstInValue(){
+	//function to determine the value of the first object that was added to the list/ or the object that has been there the longest.
+	firstValue(){
 		if (this.head == null){
 			return null;
 		}
@@ -78,5 +80,5 @@ list.addFront(1).addFront(2).addFront(3);
 console.log(list);
 list.removeFront();
 console.log(list);
-console.log('first value in list:', list.firstInValue());
+console.log('first value in list:', list.firstValue());
 
