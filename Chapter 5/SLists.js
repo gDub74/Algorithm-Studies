@@ -51,6 +51,7 @@ class SList {
 		this.head = n;
 		return this;
 	}
+	
 	removeFront(){
 		var temp = this.head;
 		if (temp == null){
@@ -61,16 +62,46 @@ class SList {
 			return this;	
 		}
 	}
+
 	//function to determine the value of the first object that was added to the list/ or the object that has been there the longest.
 	firstValue(){
 		if (this.head == null){
 			return null;
 		}
 		var pointer = this.head;
+		// look through list
 		while (pointer.next != null){
 			pointer = pointer.next;
 		}
 		return pointer.val;
+	}
+
+	//function to check if given value is in list
+	valueInList(searchVal){
+		var pointer = this.head;
+		//fast exit check
+		if (pointer.val == null){
+			return null;
+		}
+		//fast exit check
+		if (pointer.val == searchVal){
+			return true;
+		}
+		while (pointer.next != null){
+			//console.log('pointer val:', pointer.val, 'search val:', searchVal);
+			if (pointer.val == searchVal){
+				return true;
+			}
+			else{
+				pointer = pointer.next;
+			}
+		}
+		if (pointer.next == null && pointer.val == searchVal){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }
 
@@ -78,7 +109,17 @@ var list = new SList();
 console.log(list);
 list.addFront(1).addFront(2).addFront(3);
 console.log(list);
-list.removeFront();
+// list.removeFront();
 console.log(list);
 console.log('first value in list:', list.firstValue());
-
+console.log(' 0 In list?', list.valueInList(0));
+console.log('1 In list?', list.valueInList(1));
+console.log('2 In list?', list.valueInList(2));
+console.log('3 In list?', list.valueInList(3));
+console.log('4 In list?', list.valueInList(4));
+list.addFront('hello');
+console.log(list);
+console.log('hello In list?', list.valueInList('hello'));
+console.log('world In list?', list.valueInList('world'));
+list.removeFront();
+console.log('hello In list?', list.valueInList('hello'));
