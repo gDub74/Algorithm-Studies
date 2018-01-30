@@ -68,58 +68,45 @@ class SList {
 		if (this.head == null){
 			return null;
 		}
-		var pointer = this.head;
+		var curr = this.head;
 		// look through list
-		while (pointer.next != null){
-			pointer = pointer.next;
+		while (curr.next != null){
+			curr = curr.next;
 		}
-		return pointer.val;
+		return curr.val;
+	}
+
+	//returns value of head node
+	front(){
+		return this.head.val;
 	}
 
 	//function to check if given value is in list
-	valueInList(searchVal){
-		var pointer = this.head;
+	contains(searchVal){
 		//fast exit check
-		if (pointer.val == null){
+		if (this.head == null){
 			return null;
 		}
-		//fast exit check
-		if (pointer.val == searchVal){
-			return true;
-		}
-		while (pointer.next != null){
-			//console.log('pointer val:', pointer.val, 'search val:', searchVal);
-			if (pointer.val == searchVal){
+		var curr = this.head;
+		while (curr != null){
+			if (curr.val == searchVal){
 				return true;
 			}
 			else{
-				pointer = pointer.next;
+				curr = curr.next;
 			}
 		}
-		if (pointer.next == null && pointer.val == searchVal){
-			return true;
-		}
-		else{
-			return false;
-		}
+		return false;
 	}
 }
+
 
 var list = new SList();
 console.log(list);
 list.addFront(1).addFront(2).addFront(3);
 console.log(list);
 // list.removeFront();
-console.log(list);
-console.log('first value in list:', list.firstValue());
-console.log(' 0 In list?', list.valueInList(0));
-console.log('1 In list?', list.valueInList(1));
-console.log('2 In list?', list.valueInList(2));
-console.log('3 In list?', list.valueInList(3));
-console.log('4 In list?', list.valueInList(4));
-list.addFront('hello');
-console.log(list);
-console.log('hello In list?', list.valueInList('hello'));
-console.log('world In list?', list.valueInList('world'));
-list.removeFront();
-console.log('hello In list?', list.valueInList('hello'));
+console.log('head value:',list.front());
+list.removeFront()
+console.log('head value:',list.front());
+console.log(list.contains(1));
