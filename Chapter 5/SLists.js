@@ -41,6 +41,7 @@ var test = new Node();
 class SList {
 	constructor() {
 		this.head = null;
+		this.length = 0;
 	}
 
 	addFront(value) {
@@ -49,19 +50,18 @@ class SList {
 			n.next = this.head;
 		}
 		this.head = n;
+		this.length ++;
 		return this;
 	}
 	
 	removeFront(){
 		var temp = this.head;
-		if (temp == null){
-			return null
-		}
-		else{
-			this.head = this.head.next;
-			return this;	
-		}
+		this.head = this.head.next;
+		temp.next = null;
+		this.length --;
+		return this;	
 	}
+	
 
 	//function to determine the value of the first object that was added to the list/ or the object that has been there the longest.
 	firstValue(){
@@ -98,15 +98,117 @@ class SList {
 		}
 		return false;
 	}
+
+	getLength(){
+		if (!this.head){
+			return 0;
+		}
+		var count = 1;
+		var curr = this.head;
+		while (curr.next){
+			count ++;
+			curr = curr.next;
+		}
+		console.log('length:', count)
+		return this;
+	}
+
+	display(){
+		var result = [];
+		var curr = this.head;
+		while(curr){
+			result.push(curr.val);
+			curr = curr.next;
+		}
+		console.log(result);
+		return this;
+	}
+	addBack(data) {
+		var n = new Node(data);
+		if(!this.head) {
+			this.head = n;
+			return this;
+		}
+		var curr = this.head;
+		while(curr.next) {     // move to end of list
+			curr = curr.next;
+		}
+		curr.next = n;
+
+		return this;
+	}
+
+	minToFront() {
+		// check all to find smallest value
+		// move to front
+		// keep track of beforeMin and min
+		if(!this.head) {
+			return null;
+		}
+		if(this.head.next == null) {
+			return this;
+		}
+
+		var min = this.head;
+		var beforeMin = this.head;
+		var curr = this.head;
+		while(curr.next) {
+			if(curr.next.val < min.val) {
+				beforeMin = curr;
+				min = curr.next;
+			}
+			curr = curr.next;
+		}
+
+		beforeMin.next = min.next;
+		min.next = this.head;
+		this.head = min;
+		// going to return this, but only because we've built display;
+		return this;
+	}
+
+	maxToBack(){
+		if (!this.head){
+			return null;
+		}
+		if (this.head.next == null){
+			return this;
+		}
+		var max = this.head;
+		var beforeMax = this.head;
+		var curr = this.head;
+		while (curr.next){
+			if (curr.next.val > max.val){
+				beforeMax = curr;
+				max = curr.next;
+				}
+			curr = curr.next;	
+			}
+		curr.next = max;
+		beforeMax.next = max.next;
+		max.next = null;
+		return this;
+	}
+
 }
 
 
 var list = new SList();
 console.log(list);
 list.addFront(1).addFront(2).addFront(3);
+list.getLength();
 console.log(list);
-// list.removeFront();
-console.log('head value:',list.front());
-list.removeFront()
-console.log('head value:',list.front());
-console.log(list.contains(1));
+list.display();
+list.maxToBack();
+list.length();
+list.display();
+
+
+
+// // list.removeFront();
+// console.log('head value:',list.front());
+// list.removeFront()
+// console.log('head value:',list.front());
+// console.log(list.contains(1));
+// console.log(list);
+// console.log(list.removeFront());
