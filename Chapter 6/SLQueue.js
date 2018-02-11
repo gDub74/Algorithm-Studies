@@ -69,6 +69,7 @@ class SLQueue{
             return false;
         }
     }
+    
 
     //commented out size methid beccause adding this.length to the constructor is much more efficien 
     // return number of vals in queue - this is the long way of doing this.length
