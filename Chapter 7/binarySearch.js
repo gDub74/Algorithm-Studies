@@ -2,7 +2,7 @@
 //taking advantage of the fact that the array is sorted. As always, only use built-in functions that you are prepared to recreate (write yourself) on demand!
 
 var arr1 = [1,2,3,5,6,8,9];
-var val1 = 4;
+var val1 = 9;
 
 function binarySearch(arr, val){
     
