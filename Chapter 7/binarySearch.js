@@ -2,7 +2,7 @@
 //taking advantage of the fact that the array is sorted. As always, only use built-in functions that you are prepared to recreate (write yourself) on demand!
 
 var arr1 = [1,2,3,5,6,8,9];
-var val1 = 9;
+var val1 = 4;
 
 function binarySearch(arr, val){
     
@@ -25,8 +25,8 @@ function binarySearch(arr, val){
     if(checkerVal < val){
         //slice off first half of arr
         var smallerArr = arr.slice(Math.floor(arr.length/2));
-        return binarySearch(smallerArr,val);
     } 
+    return binarySearch(smallerArr,val);
 }
 
 console.log(binarySearch(arr1,val1));
