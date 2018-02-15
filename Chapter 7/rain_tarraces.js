@@ -24,8 +24,6 @@ function rainUnits(arr){
     var currHigh = arr[0];
     var maxIdx = 0;
 
-    
-
     for (var i = 1; i < arr.length; i++){
         if (arr[i] >= currHigh){
             currHigh = arr[i];
@@ -48,6 +46,11 @@ function rainUnits(arr){
     console.log(total);
     return total; 
 }
+
+
+
+//function looping(arr, currHigh, end=arr.length, start = 0, iter = 1)
+
 
 rainUnits(array1);
 rainUnits(array2);
