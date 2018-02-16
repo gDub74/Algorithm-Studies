@@ -33,40 +33,87 @@ var val1 = 4;
 
 
 
-function binarySearch2(arr, val){
-    if (arr.length == 0){  //fast fail 
+// function binarySearch2(arr, val){
+//     if (arr.length == 0){  //fast fail 
+//         return false;
+//     }
+//     while (arr.length >= 1){
+//         var checkerVal = arr[Math.floor(arr.length/2)];
+//         if (checkerVal == val){
+//             return true;
+//         }
+//         if (arr.length == 1){ 
+//         return false;
+//         }
+//         if (checkerVal > val){ //slice second half off
+//             arr = arr.slice(0, Math.floor(arr.length/2));
+//         }
+//         else{  //slice first half off
+//             arr = arr.slice(Math.floor(arr.length/2));
+//         }
+//     }
+// }
+
+
+//keep track of left and right side of search indexs in array
+//no .slice()
+
+function binarySearch3(arr, val){
+    var leftIdx = 0;
+    var rightIdx = arr.length-1
+    //fast fail
+    if (arr.length == 0){   
+        return false;
+    } 
+    //special case where length of arr is 1
+    if ((arr.length == 1) && (arr[0] == val)){  
+        return true;
+    }else if ((arr.length == 1) && (arr[0] != val)){
         return false;
     }
-    while (arr.length >= 1){
-        var checkerVal = arr[Math.floor(arr.length/2)];
+    //divide and search till we find search val length of arr is 1
+    while ((rightIdx - leftIdx) >= 1){
+        var checkerIdx = Math.floor((rightIdx - leftIdx)/2) + leftIdx;  //add the leftIdx to get the offset correct
+        var checkerVal = arr[checkerIdx];
         if (checkerVal == val){
-            return true;
+           return true;
         }
-        if (arr.length == 1){ 
-        return false;
+        if ((rightIdx - leftIdx) == 1){ 
+            if (arr[rightIdx] == val){
+                return true;
+            }else{
+              return false;  
+            }
         }
-        if (checkerVal > val){ //slice second half off
-            arr = arr.slice(0, Math.floor(arr.length/2));
+        if (checkerVal < val){
+            leftIdx = checkerIdx +1;
         }
-        else{  //slice first half off
-            arr = arr.slice(Math.floor(arr.length/2));
+        else{
+            rightIdx = checkerIdx -1;
         }
     }
 }
 
+//test cases
+var arr1 = [ 1,2,3,5,6,7,9,10,11,13];
+var arr2 = [];
+var arr3 = [3,4];
+var arr4 = [4,5];
+var arr5 = [4]
+var arr6 = [1]
+
+var val1 = 4;
 
 
-
-
-
-
-console.log(binarySearch2(arr1,val1));
-console.log('original array not modified:', arr1);
-console.log(binarySearch2(arr2,val1));
-console.log('original array not modified:', arr2);
-console.log(binarySearch2(arr3,val1));
-console.log('orig;inal array not modified:', arr3);
-console.log(binarySearch2(arr4,val1));
-console.log('orig;inal array not modified:', arr4);
-console.log(binarySearch2(arr5,val1));
-console.log('original array not modified:', arr5);
+console.log(binarySearch3(arr1,val1));
+console.log(arr1);
+console.log(binarySearch3(arr2,val1));
+console.log(arr2);
+console.log(binarySearch3(arr3,val1));
+console.log(arr3);
+console.log(binarySearch3(arr4,val1));
+console.log(arr4);
+console.log(binarySearch3(arr5,val1));
+console.log(arr5);
+console.log(binarySearch3(arr6,val1));
+console.log(arr6);
