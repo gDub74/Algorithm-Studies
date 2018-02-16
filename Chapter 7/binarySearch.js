@@ -77,6 +77,12 @@ function binarySearch3(arr, val){
         var checkerVal = arr[checkerIdx];
         if (checkerVal == val){
            return true;
+        } 
+        if (checkerVal < val){
+            leftIdx = checkerIdx;
+        }
+        else{
+            rightIdx = checkerIdx;
         }
         if ((rightIdx - leftIdx) == 1){ 
             if (arr[rightIdx] == val){
@@ -84,13 +90,7 @@ function binarySearch3(arr, val){
             }else{
               return false;  
             }
-        }
-        if (checkerVal < val){
-            leftIdx = checkerIdx +1;
-        }
-        else{
-            rightIdx = checkerIdx -1;
-        }
+        }  
     }
 }
 
