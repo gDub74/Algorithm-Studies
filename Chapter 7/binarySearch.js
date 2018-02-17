@@ -2,15 +2,6 @@
 //taking advantage of the fact that the array is sorted. As always, only use built-in functions that you are prepared to recreate (write yourself) on demand!
 
 
-//test cases
-var arr1 = [ 1,2,3,5,6,7,9];
-var arr2 = [];
-var arr3 = [3,4];
-var arr4 = [4,5];
-var arr5 = [4]
-
-var val1 = 4;
-
 // function binarySearch(arr, val){
 //     if (arr.length == 0){  //fast fail 
 //         return false;
