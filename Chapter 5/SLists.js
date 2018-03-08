@@ -35,7 +35,7 @@ class Node {
 		this.next = null;
 	}
 }
-var test = new Node();
+// var test = new Node();
 // console.log('test', test);
 
 class SList {
@@ -115,6 +115,10 @@ class SList {
 
 	display(){
 		var result = [];
+		if (!this.head){
+			console.log(result);
+			return result;
+		}
 		var curr = this.head;
 		while(curr){
 			result.push(curr.val);
@@ -189,19 +193,42 @@ class SList {
 		max.next = null;
 		return this;
 	}
+	//return Slist reversed
+	reverse(){
+		if (!this.head){
+			return this;
+		}
+		// need curr, previous, next nodes as vars
+		var curr = this.head;
+		var prev = null;
+		var nextNode;;
+		while (curr){
+			nextNode = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = nextNode;
+		}
+		//since curr is null now, prev is the last node in the original list which needs to be set to the head
+		this.head = prev;
+		return this;
+	}
 
 }
 
 
 var list = new SList();
+list.addFront(1).addFront('Hello').addFront('World').addFront(11).display();
+list.reverse().display();
+
 console.log(list);
-list.addFront(1).addFront(2).addFront(3);
-list.getLength();
-console.log(list);
-list.display();
-list.maxToBack();
-list.length();
-list.display();
+
+
+// list.getLength();
+// console.log(list);
+// list.display();
+// list.maxToBack();
+// list.length();
+// list.display();
 
 
 
