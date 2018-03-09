@@ -99,19 +99,20 @@ class SList {
 		return false;
 	}
 
-	getLength(){
-		if (!this.head){
-			return 0;
-		}
-		var count = 1;
-		var curr = this.head;
-		while (curr.next){
-			count ++;
-			curr = curr.next;
-		}
-		console.log('length:', count)
-		return this;
-	}
+	// don't need this since I made the length an attribute of the Slist class
+	// getLength(){
+	// 	if (!this.head){
+	// 		return 0;
+	// 	}
+	// 	var count = 1;
+	// 	var curr = this.head;
+	// 	while (curr.next){
+	// 		count ++;
+	// 		curr = curr.next;
+	// 	}
+	// 	console.log('length:', count)
+	// 	return this;
+	// }
 
 	display(){
 		var result = [];
@@ -201,7 +202,7 @@ class SList {
 		// need curr, previous, next nodes as vars
 		var curr = this.head;
 		var prev = null;
-		var nextNode;;
+		var nextNode;
 		while (curr){
 			nextNode = curr.next;
 			curr.next = prev;
@@ -212,15 +213,39 @@ class SList {
 		this.head = prev;
 		return this;
 	}
-
+	shiftRightBY(num){
+		if (!this.head){
+			return null;
+		}
+		// set some vars to help keep track of necessary infop for a shitf
+		var curr = this.head;
+		var prev = null;
+		//run shiftBy num times
+		//to compensate for large shifts take the remainder of the num/list length
+		var shift = num % this.length;
+		//console.log('length:', this.length,  'Input num:' ,num, 'shift: by', shift);
+		for (var i = 0; i < shift ; i++){
+			//find the last node and set to curr
+			while(curr.next){
+				prev = curr;
+				curr = curr.next;
+			}
+			//shift the pointers
+			curr.next = this.head;
+			this.head = curr;
+			prev.next = null;
+		}
+		return this;
+	}
 }
 
 
 var list = new SList();
-list.addFront(1).addFront('Hello').addFront('World').addFront(11).display();
-list.reverse().display();
+list.addFront(1).addFront(2).addFront(3).addFront(4).display();
+// list.reverse().display();
+list.shiftRightBY(99).display();
 
-console.log(list);
+
 
 
 // list.getLength();
