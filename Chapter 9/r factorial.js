@@ -34,7 +34,22 @@ function rFactorial(num,  product = 1){
     return product;
 }
 
+
+
+
+function rFact(num, product=1){
+    if (num > 1){
+        return rFact(num-1, product*num);
+    }
+    return product;
+}
+
 console.log(rFactorial(3)); // 6
 console.log(rFactorial(4)); // 24
 console.log(rFactorial(6)); // 720
+
+
+console.log(rFact(3)); // 720
+console.log(rFact(4)); // 720
+console.log(rFact(6)); // 720
 

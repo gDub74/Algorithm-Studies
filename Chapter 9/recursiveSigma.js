@@ -12,7 +12,7 @@ function Sigma(num){
     return sum;
 }
 
-console.log(Sigma(15));
+console.log(Sigma(299));
 
 
 // let sum = 0;
@@ -27,13 +27,13 @@ console.log(Sigma(15));
 
 
 // 
-function rSig(num, sum=0){
+function rSigma(num, sum=0){
     if (num > 0){
         // console.log(num, sum);
-        return rSig(num-1, sum+num);
+        return rSigma(num-1, sum+num);
     }
      return sum;
 }
 
-console.log(rSig(15));
+console.log(rSigma(299));
 // console.log(recursiveSigma(3));
