@@ -93,7 +93,7 @@ var arr2 = [];
 var arr3 = [3,4];
 var arr4 = [4,5];
 var arr5 = [4]
-var arr6 = [0, 1]
+var arr6 = [0]
 
 var val1 = 4;
 
@@ -113,7 +113,7 @@ var val1 = 4;
 
 
 function rBinary(arr, val, left=0, right=arr.length){
-    var mid = Math.floor((right-left)/2) + left;
+    var mid = Math.floor((right-left)/2) + left; //don't forget to add the left offset
     if (arr[mid] === val){
         return true;
     }
@@ -124,3 +124,9 @@ function rBinary(arr, val, left=0, right=arr.length){
 }
 
 console.log(rBinary(arr1, 420)); //true
+console.log(rBinary(arr6, 0)); //true
+console.log(rBinary(arr2, 0)); //false
+console.log(rBinary(arr2)); //true
+console.log(rBinary(arr3, 4)); //true
+console.log(rBinary(arr4, 4)); //true
+
