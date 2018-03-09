@@ -15,17 +15,25 @@ function Sigma(num){
 console.log(Sigma(15));
 
 
-let sum = 0;
+// let sum = 0;
 
-function recursiveSigma(num){
-    if (num > 1){
+// function recursiveSigma(num){
+//     if (num > 1){
+//         // console.log(num, sum);
+//         sum += num;
+//         return recursiveSigma(num - 1);
+//     }
+// }
+
+
+// 
+function rSig(num, sum=0){
+    if (num > 0){
         // console.log(num, sum);
-        sum += num;
-        return recursiveSigma(num - 1);
-    }else{
-        sum += num;
-        return sum;
+        return rSig(num-1, sum+num);
     }
+     return sum;
 }
 
-console.log(recursiveSigma(15));
+console.log(rSig(15));
+// console.log(recursiveSigma(3));
