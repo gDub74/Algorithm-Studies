@@ -123,9 +123,9 @@ function rBinary(arr, val, left=0, right=arr.length){
     return (val > arr[mid]) ? rBinary(arr, val, mid, right) : rBinary(arr, val, left , mid);
 }
 
-console.log(rBinary(arr1, 420)); //true
-console.log(rBinary(arr6, 0)); //true
+console.log(rBinary(arr1, 420)); //true console.log(rBinary(arr6, 0)); //true
 console.log(rBinary(arr2, 0)); //false
+console.log(rBinary(arr6, 0)); //true
 console.log(rBinary(arr2)); //true
 console.log(rBinary(arr3, 4)); //true
 console.log(rBinary(arr4, 4)); //true
