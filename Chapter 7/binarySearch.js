@@ -117,7 +117,7 @@ function rBinary(arr, val, left=0, right=arr.length){
     if (arr[mid] === val){
         return true;
     }
-    else if ((right-left) <= 1 ){
+    if ((right-left) <= 1 ){
         return false;
     }
     return (val > arr[mid]) ? rBinary(arr, val, mid, right) : rBinary(arr, val, left , mid);
