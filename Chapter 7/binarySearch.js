@@ -57,10 +57,12 @@ function binarySearch3(arr, val){
         return false;
     } 
     //special case where length of arr is 1
-    if ((arr.length == 1) && (arr[0] == val)){  
-        return true;
-    }else if ((arr.length == 1) && (arr[0] != val)){
-        return false;
+    if (arr.length == 1){  
+        if (arr[0] == val){
+            return true;
+        }else {
+            return false;        
+        }
     }
     //divide and search till we find search val length of arr is 1
     while ((rightIdx - leftIdx) >= 1){
@@ -86,25 +88,39 @@ function binarySearch3(arr, val){
 }
 
 //test cases
-var arr1 = [ 1,2,3,5,6,7,9,10,11,13];
+var arr1 = [ 1,2,3,4,5,6,7,9,10,11,13,14,15,16,22,24,35,46,56,57,68,79,378,420,759,777,888,999,10000];
 var arr2 = [];
 var arr3 = [3,4];
 var arr4 = [4,5];
 var arr5 = [4]
-var arr6 = [1]
+var arr6 = [0, 1]
 
 var val1 = 4;
 
 
-console.log(binarySearch3(arr1,val1));
-console.log(arr1);
-console.log(binarySearch3(arr2,val1));
-console.log(arr2);
-console.log(binarySearch3(arr3,val1));
-console.log(arr3);
-console.log(binarySearch3(arr4,val1));
-console.log(arr4);
-console.log(binarySearch3(arr5,val1));
-console.log(arr5);
-console.log(binarySearch3(arr6,val1));
-console.log(arr6);
+// console.log(binarySearch3(arr1,val1));
+// console.log(arr1);
+// console.log(binarySearch3(arr2,val1));
+// console.log(arr2);
+// console.log(binarySearch3(arr3,val1));
+// console.log(arr3);
+// console.log(binarySearch3(arr4,val1));
+// console.log(arr4);
+// console.log(binarySearch3(arr5,val1));
+// console.log(arr5);
+// console.log(binarySearch3(arr6,val1));
+// console.log(arr6);
+
+
+function rBinary(arr, val, left=0, right = arr.length){
+    var halfWay = Math.floor((right-left)/2) + left;
+    if (arr[halfWay] === val){
+        return true;
+    }
+    else if ((right-left) <= 1 ){
+        return false;
+    }
+    return (val > arr[halfWay]) ? rBinary(arr, val, halfWay, right) : rBinary(arr, val, left , halfWay);
+}
+
+console.log(rBinary(arr1, 420)); //true

@@ -22,17 +22,17 @@ console.log(factorial(4)); // 24
 console.log(factorial(6)); // 720 
 
 
-function rFactorial(num,  product = 1){
-    function recursiveFactorial(num){
-        while (num > 1){
-            product *= num;
-            return recursiveFactorial(num-1);
-        }
-    }
-    // call the inner function
-    recursiveFactorial(num);
-    return product;
-}
+// function rFactorial(num,  product = 1){
+//     function recursiveFactorial(num){
+//         while (num > 1){
+//             product *= num;
+//             return recursiveFactorial(num-1);
+//         }
+//     }
+//     // call the inner function
+//     recursiveFactorial(num);
+//     return product;
+// }
 
 
 
@@ -44,9 +44,9 @@ function rFact(num, product=1){
     return product;
 }
 
-console.log(rFactorial(3)); // 6
-console.log(rFactorial(4)); // 24
-console.log(rFactorial(6)); // 720
+// console.log(rFactorial(3)); // 6
+// console.log(rFactorial(4)); // 24
+// console.log(rFactorial(6)); // 720
 
 
 console.log(rFact(3)); // 720
