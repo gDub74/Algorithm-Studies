@@ -112,15 +112,15 @@ var val1 = 4;
 // console.log(arr6);
 
 
-function rBinary(arr, val, left=0, right = arr.length){
-    var halfWay = Math.floor((right-left)/2) + left;
-    if (arr[halfWay] === val){
+function rBinary(arr, val, left=0, right=arr.length){
+    var mid = Math.floor((right-left)/2) + left;
+    if (arr[mid] === val){
         return true;
     }
     else if ((right-left) <= 1 ){
         return false;
     }
-    return (val > arr[halfWay]) ? rBinary(arr, val, halfWay, right) : rBinary(arr, val, left , halfWay);
+    return (val > arr[mid]) ? rBinary(arr, val, mid, right) : rBinary(arr, val, left , mid);
 }
 
 console.log(rBinary(arr1, 420)); //true
