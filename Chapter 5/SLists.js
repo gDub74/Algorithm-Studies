@@ -139,7 +139,7 @@ class SList {
 			curr = curr.next;
 		}
 		curr.next = n;
-
+		this.length++;
 		return this;
 	}
 
@@ -237,13 +237,50 @@ class SList {
 		}
 		return this;
 	}
+	interleave() {
+        // fast fail, if there are less than 3 nodes, interleave doesn't make sense
+        if(this.length < 3) {
+            return this;
+        }
+        var target = this.head;
+        // floor half because we want the node before our target and we're setting curr = curr.next at the end of our loop
+        // half helps us find the halfway point in our list
+        var half = this.length % 2 === 0 ? (this.length / 2) -1: Math.floor(this.length / 2);
+        while(half) {
+            target = target.next;
+            half--;
+        }
+        // setup all the necessary pointers so we don't lose any of our nodes
+        var after = target.next;
+        var curr = this.head;
+        // whiteboards are great
+        // target.next is the one we're going to move
+        while(target.next) {
+            target.next = after.next;
+            after.next = curr.next;
+            curr.next = after;
+             //conditional to break out if we have entered the while loop an extra time in the case of even length queues
+            if (curr.next.next){
+                curr = curr.next.next;
+                after = target.next;
+            } else {
+                break;
+            }
+        }
+        // don't forget the tail!
+        this.tail = target;
+        return this;
+    }
 }
 
 
 var list = new SList();
-list.addFront(1).addFront(2).addFront(3).addFront(4).display();
-// list.reverse().display();
-list.shiftRightBY(99).display();
+// list.addFront(1).addFront(2).addFront(3).addFront(4).addFront(5).addFront(6).addFront(7).addFront(8).display();
+list.addBack(1).addBack(2).addBack(3).addBack(4).addBack(5).addBack(6).addBack(7).addBack(8).display();
+console.log(list);
+// list.reverse().display()
+// list.shiftRightBY(99).display();
+list.interleave().display();
 
 
 
