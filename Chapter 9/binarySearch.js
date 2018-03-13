@@ -51,7 +51,7 @@
 
 function binarySearch3(arr, val){
     var leftIdx = 0;
-    var rightIdx = arr.length-1
+    var rightIdx = arr.length-1;
     //fast fail
     if (arr.length == 0){   
         return false;
@@ -65,7 +65,7 @@ function binarySearch3(arr, val){
         }
     }
     //divide and search till we find search val length of arr is 1
-    while ((rightIdx - leftIdx) >= 1){
+    while ((rightIdx - leftIdx) > 0){
         var checkerIdx = Math.floor((rightIdx - leftIdx)/2) + leftIdx;  //add the leftIdx to get the offset correct
         var checkerVal = arr[checkerIdx];
         if (checkerVal == val){
@@ -80,9 +80,10 @@ function binarySearch3(arr, val){
         if ((rightIdx - leftIdx) == 1){ 
             if (arr[rightIdx] == val){
                 return true;
-            }else{
-              return false;  
             }
+            // else{
+            //   return false;  
+            // }
         }  
     }
 }
@@ -123,10 +124,10 @@ function rBinary(arr, val, left=0, right=arr.length){
     return (val > arr[mid]) ? rBinary(arr, val, mid, right) : rBinary(arr, val, left , mid);
 }
 
-console.log(rBinary(arr1, 420)); //true console.log(rBinary(arr6, 0)); //true
-console.log(rBinary(arr2, 0)); //false
-console.log(rBinary(arr6, 0)); //true
-console.log(rBinary(arr2)); //true
-console.log(rBinary(arr3, 4)); //true
-console.log(rBinary(arr4, 4)); //true
+console.log(binarySearch3(arr1, 420)); //true console.log(binarySearch3(arr6, 0)); //true
+console.log(binarySearch3(arr2, 0)); //false
+console.log(binarySearch3(arr6, 0)); //true
+console.log(binarySearch3(arr2)); //true
+console.log(binarySearch3(arr3, 4)); //true
+console.log(binarySearch3(arr4, 4)); //true
 
