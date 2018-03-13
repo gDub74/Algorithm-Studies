@@ -87,7 +87,7 @@ function buildArray(depth, length){
 
 function recursiveFlat(arr, flatArr=[]){
     for (var i = 0; i< arr.length; i++){
-        (typeof(arr[i]) == 'number') ? flatArr.push(arr[i]) : recursiveFlat(arr[i], flatArr);
+        typeof(arr[i]) == 'number' ? flatArr.push(arr[i]) : recursiveFlat(arr[i], flatArr);
     }
    return flatArr
 }
@@ -354,7 +354,7 @@ var array2 = [ [ [ 1, 2, 3, 4, 5, 6, 7, 8 ],
 
 var start2= new Date();
 start2= start2.getMilliseconds();
-console.log(recursiveFlat(array2));
+recursiveFlat(array2);
 var end2 = new Date();
 end2 = end2.getMilliseconds();
 console.log(end2 - start2+ "ms");
@@ -362,7 +362,7 @@ console.log(end2 - start2+ "ms");
 // console.log(flattenArr(y));
 var start = new Date();
 start = start.getMilliseconds();
-console.log(flattenArr(array2));
+flattenArr(array2);
 var end = new Date();
 end = end.getMilliseconds();
 console.log(end - start + "ms");
