@@ -5,7 +5,7 @@
 //  Your function should return the maximum number of grapes he can obtain.
 
 
-var grapes = [1,1,1,1,1,1,2,2,2,22,23,33,34,55,45,66,75,22,22,4]
+var grapes = [100,1,1,1,1,1,2,2,2,22,23,33,34,60,45,75,22,35,4,5]
 
 //find the max sum of either odd or even indexed values
 function rGrapeGrabber(arr, sumOdd = arr[0], sumEven = arr[1]){
