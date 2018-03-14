@@ -12,4 +12,21 @@ function rFib(num, x=0, y=1){
     return x;
 }
 
-console.log(rFib(10));
+console.log(rFib(6));
+
+
+//itterative version
+function fibonacci(num){
+    let x = 0;
+    let y = 1;
+    let temp;
+    while (num){
+        temp = y;
+        y += x;
+        x = temp
+        num--;
+    }
+    return x;
+}
+
+console.log(fibonacci(6));
