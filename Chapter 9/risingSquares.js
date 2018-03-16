@@ -8,11 +8,11 @@ function recurSquares(num, oddSqrs = '', evenSqrs = ''){
             oddSqrs = (num*num).toString() + ', ' + oddSqrs;
             return recurSquares(num -1, oddSqrs, evenSqrs);
         }
-        evenSqrs += (num*num).toString() + ', ';
+        if (num == 2){
+            evenSqrs += (num*num).toString();
+        } else {evenSqrs += (num*num).toString() + ', '};      
         return recurSquares(num -1, oddSqrs, evenSqrs);    
     }
-    return oddSqrs + evenSqrs.slice(0, -2);
+    return oddSqrs + evenSqrs;
 }
-
-
 console.log(recurSquares(8));
