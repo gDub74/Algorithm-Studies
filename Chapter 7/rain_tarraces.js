@@ -9,13 +9,9 @@ var array4 = [3,2,1,3,4]; //3
 
 // find low points between high points
 // get difference between low points and realitive lowest of the surrounding high points
-// get width of low area by difference in indexs
 
-//onec I encounter a highspot bucket continues until you get to next highspot which is >= curr
-
-
-
-var arr = [3,1,3] //so width of low spot is one - or witdh of high spots is 3, height  of tarrce is always 2 here even if one of the sides got taller...
+//onec I encounter a highspot,  currBucket continues until you get to next highspot which is >= curr
+//second pass go from end of arr backwords to the higest spot (MaxIdx) to grab any rain from that direction.
 
 
 function rainUnits(arr){
@@ -33,6 +29,7 @@ function rainUnits(arr){
         }
         currBucket += currHigh - arr[i];
     }
+    //set up for reverse pass
     currBucket = 0;
     currHigh = arr[arr.length-1];
     for (var i = arr.length-1; i >= maxIdx; i--){
