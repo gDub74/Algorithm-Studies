@@ -5,10 +5,12 @@ var array1 = [1,3,1,5,1,3,-2]; //4
 var array2 = [1,2,3,4,2,4]; //2 
 var array3 = [5,4,3,2,1,2]; //1
 var array4 = [3,2,1,3,4]; //3
+var array4 = [3,2,1,3,4]; //3
 
 
 // find low points between high points
 // get difference between low points and realitive lowest of the surrounding high points
+//add to currBucket at each index that is a low spot.
 
 //onec I encounter a highspot,  currBucket continues until you get to next highspot which is >= curr
 //second pass go from end of arr backwords to the higest spot (MaxIdx) to grab any rain from that direction.
