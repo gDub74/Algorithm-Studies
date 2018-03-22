@@ -234,7 +234,7 @@ function getRainOnePass(arr, high1=0, high2=0, totalRain=0){
         }
     }
     
-    //now move right pointer up intil it is  taller than left high or you get to end of arr
+    //now move right pointer up while it is less than left high or you get to end of arr
     while (arr[high2] < arr[high1]){ 
         high2++;
         buildingArea += arr[high2];
@@ -301,7 +301,7 @@ var array6 = [1,2,3,4,5]; //0
 var array7 = [1,2,3,4,3,2,1]; //0
 var array8 = [4,3,2,1] //0;
 var array9 = [3, 1, 2, 1, 3] //5
-var array10 = [4,3,2,1,3,2,2,2,2,1] //1
+var array10 = [4,3,2,1,3,2,1] //3
 
 
 console.log('total rain: ', getRainOnePass(array10));
