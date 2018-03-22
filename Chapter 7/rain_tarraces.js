@@ -200,7 +200,7 @@
 // if we never find a right edge dont add currRainarea to total
 
 function getRainOnePass(arr, high1=0, high2=0, totalRain=0){
-    console.log(arr);
+    // console.log(arr);
     //fast fail
     if (arr.length < 3){
         return totalRain;
@@ -234,7 +234,7 @@ function getRainOnePass(arr, high1=0, high2=0, totalRain=0){
         }
     }
     
-    //now move right pointer up intil it is at least as tall as left high ...
+    //now move right pointer up intil it is  taller than left high or you get to end of arr
     while (arr[high2] < arr[high1]){ 
         high2++;
         buildingArea += arr[high2];
@@ -248,6 +248,15 @@ function getRainOnePass(arr, high1=0, high2=0, totalRain=0){
     buildingArea -= arr[high2];
 
     
+    // here we need to check for one spacific condition that if we forget to check for the left pointer will move all the way over to the right.
+    //checking for high2 in last position and to make sure you didn't have a drop off there...
+    //this will move the left high back in the case that it reached the end of the array and there was a dropoff
+    while (arr[high2] <= arr[high2-1]){
+        //slide the pointer back because we had a drop off and havent collected the last bucket yet.
+        high2--;
+        buildingArea -= arr[high2];
+    }
+
     // now we check to see if left side(+1) is higher than right and if so move left untill its next is = or lower , dont forget to subtract those buildings if we mover the left pointer over.
     while (arr[high1 +1] >= arr[high2]){
         buildingArea -= arr[high1 + 1];
@@ -255,12 +264,20 @@ function getRainOnePass(arr, high1=0, high2=0, totalRain=0){
     }
     
     // make a bucket
+    let bucketHeight;
+    // console.log(high1, high2);
     if (arr[high1] > arr[high2]){
-        let bucketHeight = arr[high2];
+        //check to make shure that this wasn't the very last building and it did a drop off...
+        if (arr[high2] >= arr[high2-1]){
+             bucketHeight = arr[high2];
+        } else{
+             bucketHeight = arr[high2-1];
+        }
     } else {
-        bucketHeight = arr[high1];
+         bucketHeight = arr[high1];
+        // console.log(bucketHeight);
     }
-    let width = high2 - high1 - 1;
+     width = high2 - high1 - 1;
     // console.log ('width:', width, 'height:', bucketHeight)
     totalRain += (width * bucketHeight) - buildingArea;
     
@@ -284,7 +301,7 @@ var array6 = [1,2,3,4,5]; //0
 var array7 = [1,2,3,4,3,2,1]; //0
 var array8 = [4,3,2,1] //0;
 var array9 = [3, 1, 2, 1, 3] //5
-var array10 = [3,2,1,2,2,2,2,2,2,1] //1
+var array10 = [4,3,2,1,3,2,2,2,2,1] //1
 
 
 console.log('total rain: ', getRainOnePass(array10));
@@ -330,7 +347,7 @@ function testRainTerrace(func) {
       result = func(test.given);
       if (result === test.expects) {
         console.log("------------------------------------");
-        console.log("SUCCESS", test.given);
+        console.log("SUCCESS", test.given, 'total rain:', test.expects);
       } else {
         console.log("------------------------------------");
         console.log("FAILURE", test.given);
