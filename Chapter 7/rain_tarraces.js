@@ -1,12 +1,5 @@
 
 
-// tests
-var array1 = [1,3,1,5,1,3,-2]; //4
-var array2 = [1,2,3,4,2,4]; //2 
-var array3 = [5,4,3,2,1,2]; //1
-var array4 = [3,2,1,3,4]; //3
-var array6 = [4,3,2,1,2]; //1
-
 
 // find low points between high points
 // get difference between low points and realitive lowest of the surrounding high points
@@ -61,103 +54,103 @@ var array6 = [4,3,2,1,2]; //1
 // add up building area in this section
 // subtract the building area from section area and you are left with rain buckets area for this section.
 
-function getRain(array){
-    let totalBuckets = 0;
-    //this helper function will calc each areas rainBucket units and add to total | we will call this function in findBuckets function
-    function calcBuckets(width, height, buildingArea){
-        if (width != 0){
-            let area = width * height;
-            let rainUnits  = area - buildingArea;
-            totalBuckets += rainUnits;
-            console.log('new Bucket -->> bucket height:', height, 'bucket width:', width, 'curr building area: ', buildingArea, 'total Buckets:', totalBuckets);
-        }
-    }
+// function getRain(array){
+//     let totalBuckets = 0;
+//     //this helper function will calc each areas rainBucket units and add to total | we will call this function in findBuckets function
+//     function calcBuckets(width, height, buildingArea){
+//         if (width != 0){
+//             let area = width * height;
+//             let rainUnits  = area - buildingArea;
+//             totalBuckets += rainUnits;
+//             console.log('new Bucket -->> bucket height:', height, 'bucket width:', width, 'curr building area: ', buildingArea, 'total Buckets:', totalBuckets);
+//         }
+//     }
     
-    //loop thru array and find low spot areas to send to getRain function
-    // lowwBuildingArea will added to at each index if we are at a low spot
-    function findBuckets(arr){
-        console.log(arr);
-        let currHighIndex;
-        let nextHighIndex;
-        let widthOfLows = 0;   
-        let lowBuildingArea = 0
+//     //loop thru array and find low spot areas to send to getRain function
+//     // lowwBuildingArea will added to at each index if we are at a low spot
+//     function findBuckets(arr){
+//         console.log(arr);
+//         let currHighIndex;
+//         let nextHighIndex;
+//         let widthOfLows = 0;   
+//         let lowBuildingArea = 0
         
         
-        function initalizeHighs(index1, index2){
-            if (arr[index1] <= arr[index2]){
-                // currHighIndex = index2;
-                // nextHighIndex = index2;
-                initalizeHighs(index2, index2+1);
+//         function initalizeHighs(index1, index2){
+//             if (arr[index1] <= arr[index2]){
+//                 // currHighIndex = index2;
+//                 // nextHighIndex = index2;
+//                 initalizeHighs(index2, index2+1);
 
-            } else {
-                currHighIndex = index1;
-                nextHighIndex = index2;
-            }
+//             } else {
+//                 currHighIndex = index1;
+//                 nextHighIndex = index2;
+//             }
 
-            if  (arr[nextHighIndex +1] < arr[nextHighIndex]){
-                widthOfLows++;
-                lowBuildingArea += arr[nextHighIndex];
-                initalizeHighs(index1, index2 +1)
-            }
-            console.log('start: highIndex = ', currHighIndex, ', next highINdex = ', nextHighIndex);                
-        }
+//             if  (arr[nextHighIndex +1] < arr[nextHighIndex]){
+//                 widthOfLows++;
+//                 lowBuildingArea += arr[nextHighIndex];
+//                 initalizeHighs(index1, index2 +1)
+//             }
+//             console.log('start: highIndex = ', currHighIndex, ', next highINdex = ', nextHighIndex);                
+//         }
 
-        // setp highs for loop
-        initalizeHighs(0,1);
+//         // setp highs for loop
+//         initalizeHighs(0,1);
     
-        //loop thru 1 pass should find all low areas - start on index after initial nextHighIndex
-        let i = nextHighIndex + 1;
-        while (i < arr.length){
-            //reinitalize the high points
-            // initalizeHighs(currHighIndex, nextHighIndex);
-            // check for low or high spots
-            if (arr[i] <= arr[nextHighIndex]){  // potential low spot or water could flow off
-                widthOfLows ++;
-                lowBuildingArea += arr[i];
-                console.log(i, currHighIndex, nextHighIndex);
-                i++;
-            } else { // found a new high spot --> set up and call calcBuckets
-                //check against currHigh
-                if (arr[i] > arr[currHighIndex]){
-                    let temp = currHighIndex;
-                    currHighIndex = i;
-                    nextHighIndex = temp;
-                } else {
-                    nextHighIndex = i;
-                }
-                widthOfLows ++;
-                lowBuildingArea += arr[i-1];
+//         //loop thru 1 pass should find all low areas - start on index after initial nextHighIndex
+//         let i = nextHighIndex + 1;
+//         while (i < arr.length){
+//             //reinitalize the high points
+//             // initalizeHighs(currHighIndex, nextHighIndex);
+//             // check for low or high spots
+//             if (arr[i] <= arr[nextHighIndex]){  // potential low spot or water could flow off
+//                 widthOfLows ++;
+//                 lowBuildingArea += arr[i];
+//                 console.log(i, currHighIndex, nextHighIndex);
+//                 i++;
+//             } else { // found a new high spot --> set up and call calcBuckets
+//                 //check against currHigh
+//                 if (arr[i] > arr[currHighIndex]){
+//                     let temp = currHighIndex;
+//                     currHighIndex = i;
+//                     nextHighIndex = temp;
+//                 } else {
+//                     nextHighIndex = i;
+//                 }
+//                 widthOfLows ++;
+//                 lowBuildingArea += arr[i-1];
 
-                if (i == arr.length-1 && arr[currHighIndex] > arr[i]){
-                    lowBuildingArea = 0;
-                    widthOfLows = 0;
-                    nextHighIndex = i;
-                    while (arr[currHighIndex] > arr[i]){
-                        currHighIndex++;
-                    }
-                    i = currHighIndex;
-                } else {
-                    let currWidth = Math.abs(currHighIndex - nextHighIndex) - 1;
-                    let bucketHight = arr[nextHighIndex];
-                    console.log('here-->', 'i:', i, ', high Index:',currHighIndex, ', next high index:', nextHighIndex, 'widthOfLow:', widthOfLows, 'lowBuildingArea:', lowBuildingArea);
-                    calcBuckets(widthOfLows, bucketHight, lowBuildingArea);  
-                    // now reset high spot pointers to initalize potential new bucket
-                    initalizeHighs(i, i+1)
-                    i = nextHighIndex + 1;
-                    widthOfLows = 0;
-                    lowBuildingArea = 0;
-                }
+//                 if (i == arr.length-1 && arr[currHighIndex] > arr[i]){
+//                     lowBuildingArea = 0;
+//                     widthOfLows = 0;
+//                     nextHighIndex = i;
+//                     while (arr[currHighIndex] > arr[i]){
+//                         currHighIndex++;
+//                     }
+//                     i = currHighIndex;
+//                 } else {
+//                     let currWidth = Math.abs(currHighIndex - nextHighIndex) - 1;
+//                     let bucketHight = arr[nextHighIndex];
+//                     console.log('here-->', 'i:', i, ', high Index:',currHighIndex, ', next high index:', nextHighIndex, 'widthOfLow:', widthOfLows, 'lowBuildingArea:', lowBuildingArea);
+//                     calcBuckets(widthOfLows, bucketHight, lowBuildingArea);  
+//                     // now reset high spot pointers to initalize potential new bucket
+//                     initalizeHighs(i, i+1)
+//                     i = nextHighIndex + 1;
+//                     widthOfLows = 0;
+//                     lowBuildingArea = 0;
+//                 }
 
-            }
+//             }
 
-        }
-        // add any leftover buckets
-    }
-    //envoke findBuckets and send array to it
-    findBuckets(array);
-    console.log(totalBuckets);
-    return totalBuckets;
-}
+//         }
+//         // add any leftover buckets
+//     }
+//     //envoke findBuckets and send array to it
+//     findBuckets(array);
+//     console.log(totalBuckets);
+//     return totalBuckets;
+// }
 
 
 
@@ -171,25 +164,180 @@ function getRain(array){
 
 
 
-//go thru whole array and just find indexes of two highest indexs
-//then do logic to determine that if there is water between them, you can calc area and buildings 
-let highIndex = 0;
-let nextHigh = 0;
 
-function findHighs(array){
-    let results = [];
-    for (let i in array){
-        if (array[i] > array[highIndex]){
-            nextHigh = highIndex;
-            highIndex = i;
+
+
+// // if high2 > arr.length stop and don't calculate current bucket
+
+// //find left edge of a box and set i to high1 and high2 both
+// While (arr[i] <= arr[i+1]){
+//     i++
+// }
+// // now high1 and 2 ore the same spot
+// //move high2t pointer to bottom of box, right edge of bottom call this low maybe.. add buildinh hight at these indexs 
+// while (high2 + 1 <= high2){
+//     hight2 ++;
+//     buildings += add[high2];
+// }
+// // now see how far up it goes? and keep adding the buildings --> make sure not to add in the building hight of final position oh high2
+// while (high2+1 > high2){
+//     high2++
+//     buildings += arr[high2]
+// }
+// // now we have first high and second high so we need to move first high right while it is still above second height
+// //  and subtract the buildings on those indexs
+// while (high1 > high2){
+//     high1++;
+//     buildings -= arr[high1]
+// }
+
+
+// //now we have our first defined box
+// width = high2-high1-1  
+// currenRainArea = (width * height2) - buildingArea
+
+// reset high1 to high2 and start again 
+// if we never find a right edge dont add currRainarea to total
+
+function getRainOnePass(arr, high1=0, high2=0, totalRain=0){
+    console.log(arr);
+    //fast fail
+    if (arr.length < 3){
+        return totalRain;
+    }
+
+    //this is going to get reset for each recursive pass
+    let buildingArea = 0;
+
+    // find left edge of first box
+    while (arr[high1] <= arr[high1+1]){
+        // console.log(high1);
+        high1++;
+        // fast fail for if buildings just gets taller with no drop off
+        if (high1 == arr.length-1){
+            // console.log('no low spots -- up and away!')
+            return totalRain;
         }
     }
-    results.push(array[highIndex]);
-    results.push(array[nextHigh]);
-    console.log(array, highIndex, nextHigh)
-    return results;
+
+    //set high2 to same as high 1
+    high2 = high1;
+    
+    //find low right of current box add building area along the way
+    while (arr[high2 + 1] <= arr[high2]){
+        high2++;
+        buildingArea += arr[high2];
+        //fast fail for if it never goes back up
+        if (high2 == arr.length-1){
+            // console.log('rain running off, nothing to collect here, total rain:', totalRain);
+            return totalRain;
+        }
+    }
+    
+    //now move right pointer up intil it is at least as tall as left high ...
+    while (arr[high2] < arr[high1]){ 
+        high2++;
+        buildingArea += arr[high2];
+        // if we fund the end of the array we need to break out and collect rain
+        if (high2 == arr.length-1){
+            // console.log('found end of buildings -- time to collect rain!');
+            break;
+        } 
+    }
+    // we actually dont want that last building because that is our new high 2 so lets subtract it
+    buildingArea -= arr[high2];
+
+    
+    // now we check to see if left side(+1) is higher than right and if so move left untill its next is = or lower , dont forget to subtract those buildings if we mover the left pointer over.
+    while (arr[high1 +1] >= arr[high2]){
+        buildingArea -= arr[high1 + 1];
+        high1++;
+    }
+    
+    // make a bucket
+    if (arr[high1] > arr[high2]){
+        let bucketHeight = arr[high2];
+    } else {
+        bucketHeight = arr[high1];
+    }
+    let width = high2 - high1 - 1;
+    // console.log ('width:', width, 'height:', bucketHeight)
+    totalRain += (width * bucketHeight) - buildingArea;
+    
+    // console.log('high1:',high1, ' high2:', high2,' current building area:', buildingArea, 'total rain:', totalRain); 
+
+    //now if high2 < arr.lenght lets recursivly call our function wiht the new starting positions both starting from high2
+    if (high2 < arr.length-1){
+        return getRainOnePass(arr, high2, high2, totalRain);
+    }
+    //otherwise we return the rain
+
+    return totalRain;
 }
 
+var array1 = [1,2,3,3,3,1,5,1,3,-2]; //4
+var array2 = [1,2,3,4,2,4]; //2 
+var array3 = [5,4,3,2,1,2]; //1
+var array4 = [3,2,1,3,4]; //3
+var array5 = [4,3,2,1,2,3,4,5,4,3,2,1]; //9
+var array6 = [1,2,3,4,5]; //0
+var array7 = [1,2,3,4,3,2,1]; //0
+var array8 = [4,3,2,1] //0;
+var array9 = [3, 1, 2, 1, 3] //5
+var array10 = [3,2,1,2,2,2,2,2,2,1] //1
 
-let highPoints = findHighs(array1);
-console.log(`high points --> ${highPoints[0]} with a value of ${array1[highPoints[0]]} `);
+
+console.log('total rain: ', getRainOnePass(array10));
+
+// // tests
+function testRainTerrace(func) {
+    var tests = [
+      {
+        given: [3, 1, 1, 4, 2],
+        expects: 4
+      },
+      {
+        given: [1, 1, 1, 1, 1],
+        expects: 0
+      },
+      {
+        given: [],
+        expects: 0
+      },
+      {
+        given: [12, 1, 12, 1, 12],
+        expects: 22
+      },
+      {
+        given: [12, 11, 10, 9, 8],
+        expects: 0
+      },
+      {
+        given: [3, 1, 2, 1, 4, 2, 1],
+        expects: 5
+      },
+      {
+        given: [1, 2, 3, 4, 5, 6, 7, 8],
+        expects: 0
+      },
+      {
+        given: [8, 7, 6, 5, 4, 3, 2, 1],
+        expects: 0
+      }
+    ];
+    var result;
+    for (var test of tests) {
+      result = func(test.given);
+      if (result === test.expects) {
+        console.log("------------------------------------");
+        console.log("SUCCESS", test.given);
+      } else {
+        console.log("------------------------------------");
+        console.log("FAILURE", test.given);
+        console.log("Expected: ", test.expects);
+        console.log("Returned: ", result);
+      }
+    }
+  }
+
+  testRainTerrace(getRainOnePass);
