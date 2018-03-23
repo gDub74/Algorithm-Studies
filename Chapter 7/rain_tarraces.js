@@ -199,98 +199,199 @@
 // reset high1 to high2 and start again 
 // if we never find a right edge dont add currRainarea to total
 
+// function getRainOnePass(arr, high1=0, high2=0, totalRain=0){
+//     // fast fail 
+//     if (arr.length < 3){
+//         return totalRain;
+//     }
+
+//     let buildingArea = 0;
+
+
+// // find starting high point
+//     const leftHigh = (arr, high1, high2, totalRain) => {
+//       while (arr[high1] <= arr[high1+1]){
+//           // console.log(high1);
+//           high1++;
+//           // fast fail for if buildings just gets taller with no drop off
+//           if (high1 == arr.length-1){
+//               // console.log('no low spots -- up and away!')
+//               return totalRain;
+//           }
+//       }
+//       //this initalizes both indexs 
+//       high2 = high1;
+//     }
+   
+
+//     //find low right of current box add building area along the way
+//     const lowRight = (arr, high1, high2, totalRain) => {
+//       while (arr[high2 + 1] <= arr[high2]){
+//           high2++;
+//           buildingArea += arr[high2];
+//           //fast fail for if it never goes back up
+//           if (high2 == arr.length-1){
+//               // console.log('rain running off, nothing to collect here, total rain:', totalRain);
+//               return totalRain;
+//           }
+//       }
+//     }
+    
+
+    
+//     //now move right pointer up while it is less than left high or you get to end of arr
+//     const rightHigh = (arr, high1, high2, totalRain)=> {
+//       while (arr[high2] < arr[high1]){ 
+//           high2++;
+//           buildingArea += arr[high2];
+//           // if we fund the end of the array we need to break out and collect rain
+//           if (high2 == arr.length-1){
+//               // console.log('found end of buildings -- time to collect rain!');
+//               break;
+//           } 
+//       }
+//       // we actually dont want that last building because that is our new high 2 so lets subtract it
+//       buildingArea -= arr[high2];
+//     }
+
+    
+//     //this will move the left high back in the case that it reached the end of the array and there was a dropoff
+//     const realLeftHigh = (arr, high1, high2, totalRain) => {
+//       while (arr[high2] <= arr[high2-1]){
+//           //slide the pointer back because we had a drop off and havent collected the last bucket yet.
+//           high2--;
+//           buildingArea -= arr[high2];
+//       }
+//     }
+
+//     // now we check to see if left side(+1) is higher than right and if so move left untill its next is = or lower , dont forget to subtract those buildings if we mover the left pointer over.
+//     const doubleCheckLeft = (arr, high1, high2, totalRain) => {
+//       while (arr[high1 +1] >= arr[high2]){
+//           buildingArea -= arr[high1 + 1];
+//           high1++;
+//       }
+//     }
+    
+
+//     // calculate the water in a given area
+//     const getBucket = (arr, high1, high2, totalRain) => {
+//       let bucketHeight;
+//       // console.log(high1, high2);
+//       if (arr[high1] > arr[high2]){
+//           //check to make shure that this wasn't the very last building and it did a drop off...
+//           if (arr[high2] >= arr[high2-1]){
+//                bucketHeight = arr[high2];
+//           } else{
+//                bucketHeight = arr[high2-1];
+//           }
+//       } else {
+//            bucketHeight = arr[high1];
+//           // console.log(bucketHeight);
+//       }
+//       let width = high2 - high1 - 1;
+//       // console.log ('width:', width, 'height:', bucketHeight)
+//       totalRain += (width * bucketHeight) - buildingArea;
+//     }
+  
+//     //  console.log('high1:',high1, ' high2:', high2,' current building area:', buildingArea, 'total rain:', totalRain); 
+
+//      const endCheck = (arr, high1, high2, totalRain) => {
+//        //now if high2 < arr.lenght lets recursivly call our function wiht the new starting positions both starting from high2
+//        if (high2 < arr.length-1){
+//            return getRainOnePass(arr, high2, high2, totalRain);
+//        }
+//      //otherwise we return the rain
+//        return totalRain; 
+//      }
+
+
+//      //self envoking driver function
+//     const driver = (arr, high1, high2, totalRain) => {
+//        leftHigh(arr, high1, high2, totalRain);
+//        lowRight(arr, high1, high2, totalRain);
+//        rightHigh(arr, high1, high2, totalRain);
+//        realLeftHigh(arr, high1, high2, totalRain);
+//        doubleCheckLeft(arr, high1, high2, totalRain);
+//        getBucket(arr, high1, high2, totalRain);
+//        endCheck(arr, high1, high2, totalRain);
+//      }
+
+//     driver();
+// }
+
+
 function getRainOnePass(arr, high1=0, high2=0, totalRain=0){
-    // console.log(arr);
-    //fast fail
-    if (arr.length < 3){
-        return totalRain;
-    }
+  //fast fail
+  if (arr.length < 3){
+      return totalRain;
+  }
+  let buildingArea = 0;
 
-    //this is going to get reset for each recursive pass
-    let buildingArea = 0;
+  // find left edge of first box
+  while (arr[high1] <= arr[high1+1]){
+      high1++;
+      // fast fail for if buildings just gets taller with no drop off
+      if (high1 == arr.length-1){
+          return totalRain;
+      }
+  }
+  high2 = high1;
 
-    // find left edge of first box
-    while (arr[high1] <= arr[high1+1]){
-        // console.log(high1);
-        high1++;
-        // fast fail for if buildings just gets taller with no drop off
-        if (high1 == arr.length-1){
-            // console.log('no low spots -- up and away!')
-            return totalRain;
-        }
-    }
+  //find low right of current box add building area along the way
+  while (arr[high2 + 1] <= arr[high2]){
+      high2++;
+      buildingArea += arr[high2];
+      //fast fail for if it never goes back up
+      if (high2 == arr.length-1){
+          return totalRain;
+      }
+  }
 
-    //set high2 to same as high 1
-    high2 = high1;
-    
-    //find low right of current box add building area along the way
-    while (arr[high2 + 1] <= arr[high2]){
-        high2++;
-        buildingArea += arr[high2];
-        //fast fail for if it never goes back up
-        if (high2 == arr.length-1){
-            // console.log('rain running off, nothing to collect here, total rain:', totalRain);
-            return totalRain;
-        }
-    }
-    
-    //now move right pointer up while it is less than left high or you get to end of arr
-    while (arr[high2] < arr[high1]){ 
-        high2++;
-        buildingArea += arr[high2];
-        // if we fund the end of the array we need to break out and collect rain
-        if (high2 == arr.length-1){
-            // console.log('found end of buildings -- time to collect rain!');
-            break;
-        } 
-    }
-    // we actually dont want that last building because that is our new high 2 so lets subtract it
-    buildingArea -= arr[high2];
+  //now move right pointer up while it is less than left high or you get to end of arr
+  while (arr[high2] < arr[high1]){ 
+      high2++;
+      buildingArea += arr[high2];
+      // if we fund the end of the array we need to break out and collect rain
+      if (high2 == arr.length-1){
+          break;
+      } 
+  }
+  // we actually dont want that last building because that is our new high 2 so lets subtract it
+  buildingArea -= arr[high2];
 
-    
-    // here we need to check for one spacific condition that if we forget to check for the left pointer will move all the way over to the right.
-    //checking for high2 in last position and to make sure you didn't have a drop off there...
-    //this will move the left high back in the case that it reached the end of the array and there was a dropoff
-    while (arr[high2] <= arr[high2-1]){
-        //slide the pointer back because we had a drop off and havent collected the last bucket yet.
-        high2--;
-        buildingArea -= arr[high2];
-    }
+  // here we need to check for one spacific condition that if we forget to check for the left pointer will move all the way over to the right. -->haven't figured yet how to combine this with the above condition to make more efficent..
+  //this will move the left high back in the case that it reached the end of the array and there was a dropoff
+  while (arr[high2] <= arr[high2-1]){
+      high2--;
+      buildingArea -= arr[high2];
+  }
 
-    // now we check to see if left side(+1) is higher than right and if so move left untill its next is = or lower , dont forget to subtract those buildings if we mover the left pointer over.
-    while (arr[high1 +1] >= arr[high2]){
-        buildingArea -= arr[high1 + 1];
-        high1++;
-    }
-    
-    // make a bucket
-    let bucketHeight;
-    // console.log(high1, high2);
-    if (arr[high1] > arr[high2]){
-        //check to make shure that this wasn't the very last building and it did a drop off...
-        if (arr[high2] >= arr[high2-1]){
-             bucketHeight = arr[high2];
-        } else{
-             bucketHeight = arr[high2-1];
-        }
-    } else {
-         bucketHeight = arr[high1];
-        // console.log(bucketHeight);
-    }
-     width = high2 - high1 - 1;
-    // console.log ('width:', width, 'height:', bucketHeight)
-    totalRain += (width * bucketHeight) - buildingArea;
-    
-    // console.log('high1:',high1, ' high2:', high2,' current building area:', buildingArea, 'total rain:', totalRain); 
+  // now we check to see if left side(+1) is higher than right and if so move left untill its next is = or lower , dont forget to subtract those buildings if we mover the left pointer over.
+  while (arr[high1 +1] >= arr[high2]){
+      buildingArea -= arr[high1 + 1];
+      high1++;
+  }
 
-    //now if high2 < arr.lenght lets recursivly call our function wiht the new starting positions both starting from high2
-    if (high2 < arr.length-1){
-        return getRainOnePass(arr, high2, high2, totalRain);
-    }
-    //otherwise we return the rain
+  // make a bucket
+  let bucketHeight;
+  if (arr[high1] > arr[high2]){
+      //check to make shure that this wasn't the very last building and it did a drop off...
+      bucketHeight = arr[high2];
+  } else {
+       bucketHeight = arr[high1];
+  }
+   width = high2 - high1 - 1;
+  totalRain += (width * bucketHeight) - buildingArea;
 
-    return totalRain;
+  //now if high2 < arr.length lets recursivly call our function wiht the new starting positions both starting from high2
+  if (high2 < arr.length-1){
+      return getRainOnePass(arr, high2, high2, totalRain);
+  }
+  //otherwise we return the rain
+  return totalRain;
 }
+
+
 
 var array1 = [1,2,3,3,3,1,5,1,3,-2]; //4
 var array2 = [1,2,3,4,2,4]; //2 

@@ -37,10 +37,10 @@ ar1 = [0, [1,2,[3],4], [], 5, [6]];
 ar2 = [[[[[[[[]]]]]]]];
 test = [1, [[[2, 3], 4], [1, 2, 3]], 4, []];
 test2 = [1];
-console.log(newFlatCity(ar1),'----');
-console.log(newFlatCity(ar2),'----');
-console.log(newFlatCity(test),'----');
-console.log(newFlatCity(test2),'----');
+// console.log(newFlatCity(ar1),'----');
+// console.log(newFlatCity(ar2),'----');
+// console.log(newFlatCity(test),'----');
+// console.log(newFlatCity(test2),'----');
 
 
 // //working version 
@@ -134,7 +134,8 @@ function recursiveFlat(arr, flatArr=[]){
     }
     return flatArr
 }
-
+var x= [0,[1,2,[3]],4];
+console.log(recursiveFlat(x));
 //non recursivly
 //
 function flattenArr(arr){
@@ -170,12 +171,11 @@ function flattenArr(arr){
 
 
 // tests
-var x= [0,[1,2,[3]],4];
 var y = [1,[2,3,4,[5,6,7,[8],9],10],11]
 var z = [0,[],[[],0]]
 
-console.log(flattenArr(y));
-console.log(newFlatCity(y),'----');
+// console.log(flattenArr(y));
+// console.log(newFlatCity(y),'----');
 
 // console.log(x);
 // // console.log(flatz(x));
