@@ -127,7 +127,7 @@ function rBinary(arr, val, left=0, right=arr.length){
 console.log(binarySearch3(arr1, 420)); //true console.log(binarySearch3(arr6, 0)); //true
 console.log(binarySearch3(arr2, 0)); //false
 console.log(binarySearch3(arr6, 0)); //true
-console.log(binarySearch3(arr2)); //true
+console.log(binarySearch3(arr2,)); //true
 console.log(binarySearch3(arr3, 4)); //true
 console.log(binarySearch3(arr4, 4)); //true
 
