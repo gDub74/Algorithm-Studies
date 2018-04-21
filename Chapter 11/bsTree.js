@@ -89,9 +89,9 @@ class BST {
     }
   
     height(node = this.root) {
-        // if (!(node instanceof BSTNode)) {
-        //     return null;
-        // }
+        if (!(node instanceof BSTNode)) {
+            return null;
+        }
         if (!node) {
             return 0;
         }
@@ -119,11 +119,8 @@ class BST {
         if (!node) {
             return false;
         }
-        let leftHeight = this.height(node.left);
-        let rightHeight = this.height(node.right);
-        console.log(leftHeight, rightHeight);
-        console.log('height check', leftHeight - rightHeight > 1, rightHeight - leftHeight > 1);
-        if (Math.abs(leftHeight - rightHeight) > 1) {
+        // check difference in height between keft and right branch or sub brnch
+        if (Math.abs(this.height(node.left) -  this.height(node.right)) > 1) {
             return false
         }
         // look left
@@ -136,13 +133,13 @@ class BST {
             this.isBalanced(node.left);
             this.isBalanced(node.right);
         }
-        // if we passe all conditions then Balanced
+        // if we passe all conditionals then Balanced
         return true 
     }
 }
 
 let tree = new BST();
-tree.add(20).add(10).add(30).add(40).add(50);
+tree.add(20).add(10).add(30).add(40);
 // console.log(tree.height());
 // console.log(tree.heightLeftEqualRight());
 console.log(tree.isBalanced());
