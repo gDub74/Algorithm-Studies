@@ -117,29 +117,73 @@ class BST {
             return null;
         }
         if (!node) {
-            return false;
+            return true;
         }
         // check difference in height between keft and right branch or sub brnch
-        if (Math.abs(this.height(node.left) -  this.height(node.right)) > 1) {
+        if (Math.abs(this.height(node.left) - this.height(node.right)) > 1) {
             return false
         }
-        // look left
-        if (node.left) {
-            this.isBalanced(node.left);
-            this.isBalanced(node.right);
+        this.isBalanced(node.left);
+        this.isBalanced(node.right);
+        
+        // // look left
+        // if (node.left) {
+        //     this.isBalanced(node.left);
+        //     this.isBalanced(node.right);
+        // }
+        // // look right
+        // if (node.right) {
+        //     this.isBalanced(node.left);
+        //     this.isBalanced(node.right);
+        // }
+        // // if we passe all conditionals then Balanced
+        return true;
+    }
+
+    arrayToBST(array) {
+        let value;
+        let firstHalf;
+        let secondHalf;
+        if (array.length > 1) {
+            // if (array.length % 2 == 0) {
+            //     value = array[(array.length / 2) - 1];
+            //     //save first half upto but not including new node val
+            //     firstHalf = array.slice(0, (array.length / 2) - 1);
+            //     //save second half starting after new node val
+            //     secondHalf = array.slice(array.length / 2);
+            //     console.log(firstHalf, secondHalf);
+            // } else {
+            //     value = array[Math.floor(array.length / 2)];
+            //     firstHalf = array.slice(0, Math.floor(array.length / 2));
+            //     secondHalf =  array.slice(Math.floor(array.length / 2)+1);;
+            //     console.log(firstHalf, secondHalf);
+            // }
+            value = array[Math.floor(array.length / 2)];
+            firstHalf = array.slice(0, Math.floor(array.length / 2));
+            secondHalf =  array.slice(Math.floor(array.length / 2)+1);;
+            console.log(firstHalf, secondHalf);
+            this.add(value);
+            this.arrayToBST(firstHalf);
+            this.arrayToBST(secondHalf);
+        } else { 
+            // array length now 1
+            if (array[0]) {
+                this.add(array[0]);
+            }
+            return this
         }
-        // look right
-        if (node.right) {
-            this.isBalanced(node.left);
-            this.isBalanced(node.right);
-        }
-        // if we passe all conditionals then Balanced
-        return true 
     }
 }
 
-let tree = new BST();
-tree.add(20).add(10).add(30).add(40);
+
+// let tree = new BST();
+// tree.add(20).add(10).add(30).add(40);
 // console.log(tree.height());
 // console.log(tree.heightLeftEqualRight());
-console.log(tree.isBalanced());
+// console.log(tree.isBalanced());
+
+const myTree = new BST();
+let myArray = [1, 2, 3, 4, 5, 6,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+myTree.arrayToBST(myArray);
+console.log(myTree);
+console.log(myTree.isBalanced());
