@@ -1,4 +1,4 @@
-// Compare two arrays and return a new array with any items only found in one of the two given arrays, but not both. In other words, return the symmetric difference of the two arrays. Order doesn
+// Compare two arrays and return a new array with any items only found in one of the two given arrays, but not both. In other words, return the symmetric difference of the two arrays. Order doesn't matter on return array.
 
 
 const testa = [[1, "calf", 3, "piglet"], [1, "calf", 3, 4]]; // should return ["piglet", 4].
@@ -15,11 +15,8 @@ const testg = [["andesite", "grass", "dirt", "dead shrub"], ["andesite", "grass"
 
 function diffOfArrs(arr1, arr2) {
     let newArr = [];
-
-    // newArr = arr1.length > arr2.length ? [...arr1] : [...arr2];
-    //find longes arr and copy into newArr
-    // let longerArr;
-
+   
+    // find the longer of the two arrays and copy it into newArr
     let shorterArr
     if (arr1.length >= arr2.length) {
         newArr = [...arr1];
