@@ -91,4 +91,28 @@ function symmetricalDiff(arr1, arr2) {
     return newArr;
 }
 
-console.log(symmetricalDiff(teste[0], teste[1]));
+// console.log(symmetricalDiff(teste[0], teste[1]));
+
+function getArrDiff(...arrays) {
+    const newArr = []
+    const obj = {}
+    for (arr of arrays) {
+        console.log(arr);
+        for (val of arr) {
+            if (!obj[val]) {
+                obj[val] = 1
+            } else {
+                obj[val]++;
+            }
+        }
+    }
+    for (key in obj) {
+        if (obj[key] === 1) {
+            newArr.push(key);
+        }
+    }
+    console.log(obj);
+    return newArr;
+}
+
+console.log(getArrDiff(testg[0], testg[1]));
