@@ -93,14 +93,16 @@ function symmetricalDiff(arr1, arr2) {
 
 // console.log(symmetricalDiff(teste[0], teste[1]));
 
+
+// working with variable numebr of arrays now and only one object to keep track of the values and if they repeat in the other arrays.
 function getArrDiff(...arrays) {
-    const newArr = []
-    const obj = {}
+    const newArr = [];
+    const obj = {};
     for (arr of arrays) {
         console.log(arr);
         for (val of arr) {
             if (!obj[val]) {
-                obj[val] = 1
+                obj[val] = 1;
             } else {
                 obj[val]++;
             }
