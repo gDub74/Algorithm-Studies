@@ -46,4 +46,49 @@ function diffOfArrs(arr1, arr2) {
     return newArr;
 }
 
-console.log(diffOfArrs(testa[0], testa[1]));
+// console.log(diffOfArrs(testa[0], testa[1]));
+
+function symmetricalDiff(arr1, arr2) {
+    newArr = []
+    const obj1 = {};
+    const obj2 = {};
+
+    for (val of arr1) {
+        obj1[val] = null;
+    }
+    
+    for (val of arr2) {
+        obj2[val] = null;
+    }
+
+    for (key in obj1) {
+        let  inBoth = false
+        for (k in obj2) {
+            if (k === key) {
+                inBoth = true;
+            }
+        }
+        if (!inBoth) {
+            newArr.push(key)
+        }
+    }
+
+    for (key in obj2) {
+        let inBoth = false
+        for (k in obj1) {
+            if (k === key) {
+                inBoth = true;
+            }
+        }
+        if (!inBoth) {
+            newArr.push(key)
+        }
+    }
+
+
+    console.log(obj1);
+    console.log(obj2);
+    return newArr;
+}
+
+console.log(symmetricalDiff(teste[0], teste[1]));
