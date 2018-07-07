@@ -1,3 +1,4 @@
+//ES5 implimentation
 
 // function Node(val) {
 // 	this.val = val;
@@ -29,14 +30,16 @@
 // myNode.sayHello();
 
 
+
+//ES6 implimentation
+
 class Node {
 	constructor(val) {
 		this.val = val;
 		this.next = null;
 	}
 }
-// var test = new Node();
-// console.log('test', test);
+
 
 class SList {
 	constructor() {
@@ -63,7 +66,7 @@ class SList {
 	}
 	
 
-	//function to determine the value of the first object that was added to the list/ or the object that has been there the longest.
+	//method to determine the value of the first object that was added to the list/ or the object that has been there the longest.
 	firstValue(){
 		if (this.head == null){
 			return null;
@@ -81,7 +84,7 @@ class SList {
 		return this.head.val;
 	}
 
-	//function to check if given value is in list
+	// method to check if given value is in list
 	contains(searchVal){
 		//fast exit check
 		if (this.head == null){
@@ -99,7 +102,7 @@ class SList {
 		return false;
 	}
 
-	// don't need this since I made the length an attribute of the Slist class
+	// don't need this since I made the length a property of the Slist class
 	// getLength(){
 	// 	if (!this.head){
 	// 		return 0;
@@ -273,6 +276,8 @@ class SList {
     }
 }
 
+
+// should write some tests for this for practice
 
 var list = new SList();
 // list.addFront(1).addFront(2).addFront(3).addFront(4).addFront(5).addFront(6).addFront(7).addFront(8).display();
