@@ -31,7 +31,8 @@ function removeVals(arr, startIndex, endIndex) {
     let leftShiftOffset = endIndex;
 
     // left shif values from one past range to startIndex
-    for (let i = startIndex; i <= endIndex + 1; i++) {
+    // i has to go untiil the offset reaches the last value in the aray
+    for (let i = startIndex; i < arr.length - shortenArrBy; i++) {
         // left shift values
         arr[i] = arr[leftShiftOffset + 1];
         leftShiftOffset++;
@@ -41,4 +42,4 @@ function removeVals(arr, startIndex, endIndex) {
     return arr
 }
 
-console.log(removeVals([20,30,40,50,60,70],4,2));
+console.log(removeVals([20,30,40,50,60,70, 80, 90],0,0));
