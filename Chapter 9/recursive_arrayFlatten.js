@@ -126,18 +126,32 @@ function buildArray(depth, length){
     }
     return arr;
 }
-// console.log(Math.floor(Math.random() * Math.floor(10)));
 
+
+
+
+
+// probably should add some safeguards against typew not being an array or a number. also should be modified to accept strings.  
 function recursiveFlat(arr, flatArr=[]){
     for (var i = 0; i< arr.length; i++){
         typeof(arr[i]) == 'number' ? flatArr.push(arr[i]) : recursiveFlat(arr[i], flatArr);
     }
     return flatArr
 }
+
+
+
 var x= [0,[1,2,[3]],4];
 console.log(recursiveFlat(x));
 //non recursivly
 //
+
+
+
+
+
+
+
 function flattenArr(arr){
     var targetArr = [];
     baseLevel = true;
